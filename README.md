@@ -8,3 +8,5 @@ Projet créé pendant mon apprentissage Linux sur WSL2.
 - Bash scripting
 - SSH et réseau
 - Git et GitHub
+- Cron jobs et automatisation
+- Git et GitHub via SSH
