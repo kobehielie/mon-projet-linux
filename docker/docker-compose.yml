@@ -1,0 +1,15 @@
+
+services:
+  web:
+    build: .
+    ports:
+      - "7777:80"
+    container_name: elijah-compose
+    restart: always
+
+  nginx-officiel:
+    image: nginx:latest
+    ports:
+      - "9091:80"
+    container_name: nginx-compose
+    restart: always
