@@ -1,0 +1,316 @@
+    1  ls
+    2  ls -la
+    3  chmod 777 .cahce
+    4  chmod 777 .cache
+    5  ls -la
+    6  cd ../..
+    7  cd /home
+    8  cd /elijah
+    9  cd elijah/
+   10  logout
+   11  exit
+   12  cat ~/projets/linux-cours/historique-commandes.txt
+   13  pwd
+   14  cd ~
+   15  cd ~/projets/scripts
+   16  cd ..
+   17  tree
+   18  cd ~/projets/scripts
+   19  nano mon-premier-script.sh
+   20  chmod 755 mon-premier-script.sh
+   21  ./mon-premier-script.sh
+   22  tree
+   23  cat mon-premier-script.sh
+   24  nano mon-premier-script.sh
+   25  cat mon-premier-script.sh
+   26  ./mon-premier-script.sh
+   27  nano variables.sh
+   28  df /
+   29  nano variables.sh
+   30  chmod 755 variables.sh
+   31  ./variables.sh
+   32  nano variables.sh
+   33  ./variables.sh
+   34  nano variables.sh
+   35  ./variables.sh
+   36  cat -n variables.sh
+   37  nano variables.sh
+   38  ./variables.sh
+   39  cat -n variables.sh | grep awk
+   40  nano variables.sh
+   41  ./variables.sh
+   42  nano variables.sh
+   43  cd ~
+   44  ip a
+   45  ss -tulpn | head -10
+   46  sudo apt update
+   47  sudo apt install -y openssh-server
+   48  which sshd
+   49  sshd --version
+   50  sudo service ssh start
+   51  sudo service ssh status
+   52  ss -tulpn | grep :22
+   53  useradd -m -s /bin/bash king
+   54  passwd king2026
+   55  passwd king
+   56  usermod -aG sudo king
+   57  sudo service ssh restart
+   58  sudo service ssh start
+   59  sudo service ssh status
+   60  cd ~/projets/scripts
+   61  tree
+   62  cat variables.sh
+   63  nano variables.sh
+   64  ./variables.sh
+   65  nano fonctions.sh
+   66  ./fonctions.sh
+   67  chmod 755 ~/projets/scripts/fonctions.sh
+   68  ./fonctions.sh
+   69  nano fonctions.sh
+   70  ./fonctions.sh
+   71  nano fonctions.sh
+   72  cat > ~/projets/scripts/admin.sh << 'EOF'
+# Script d'administration système
+LOGFILE=~/projets/scripts/admin.log
+
+logger() {
+    echo "[$(date '+%H:%M:%S')] $1" | tee -a $LOGFILE
+}
+
+verifier_disque() {
+    ESPACE=$(df / | tail -1 | awk '{print $5}' | tr -d '%')
+    if [ $ESPACE -gt 80 ]; then
+        logger "ALERTE : disque à $ESPACE%"
+    else
+        logger "OK : disque à $ESPACE%"
+    fi
+}
+
+verifier_ram() {
+    LIBRE=$(free -m | awk 'NR==2{print $4}')
+    if [ $LIBRE -lt 500 ]; then
+        logger "ALERTE : RAM libre $LIBRE MB"
+    else
+        logger "OK : RAM libre $LIBRE MB"
+    fi
+}
+
+lister_scripts() {
+    logger "Scripts disponibles :"
+    for S in ~/projets/scripts/*.sh; do
+        logger "  → $(basename $S)"
+    done
+}
+
+logger "=== Rapport système ==="
+verifier_disque
+verifier_ram
+lister_scripts
+logger "=== Fin du rapport ==="
+
+echo ""
+echo "Log sauvegardé dans $LOGFILE"
+cat $LOGFILE
+EOF
+
+   73  chmod 755 ~/projets/scripts/admin.sh
+   74  ./~/projets/scripts/admin.sh
+   75  tree
+   76  nano admin.sh
+   77  ./~/projets/scripts/admin.sh
+   78  ./admin.sh
+   79  cd ~
+   80  crontab -e
+   81  crontab -l
+   82  service cron start
+   83  service cron status
+   84  crotab -e
+   85  crontab -e
+   86  tail -f /root/projets/scripts/test-cron.log
+   87  crontab -l | tail -5
+   88  tail -f /root/projets/scripts/test-cron.log
+   89  touch /root/projets/scripts/test-cron.log
+   90  tail -f /root/projets/scripts/test-cron.log
+   91  ping -c 4 google.com
+   92  ping -c 10 google.com
+   93  ip addr show
+   94  ip route show
+   95  cat /etc/resolv.conf
+   96  nslookup google.com
+   97  apt install bind9-dnsutils
+   98  nslookup google.com
+   99  curl https://example.com | head -20
+  100  curl -I https://google.com
+  101  curl -O https://example.com/index.html
+  102  curl https://api.ipify.org
+  103  cd ~
+  104  ls -la index.html
+  105  cat index.html
+  106  ssh -V
+  107  ssh-keygen -t ed25519 -C "elieeliseekobehi20@gmail.com"
+  108  ls -la ~/.ssh/
+  109  car ~/.ssh/id_ed25519
+  110  cat ~/.ssh/id_ed25519
+  111  cat ~/.ssh/id_ed25519.pub
+  112  naon ~/.ssh
+  113  nano ~/.ssh
+  114  nano ~/.ssh/config
+  115  chmod 600 ~/.ssh/config
+  116  chmod 700 ~/.ssh/
+  117  ls -la ~/.ssh/
+  118  ssh -i ~/.ssh/id_ed25519 root@192.168.1.100
+  119  ssh monserveur
+  120  ssh -o StrictHostKeyChecking=no demo@test.rebex.net
+  121  ssh -T git@github.com
+  122  cat ~/.ssh/id_ed25519.pub
+  123  ssh -T git@github.com
+  124  rm ~/.ssh/id_ed25519 ~/.ssh/id_ed25519.pub
+  125  ls -la ~/.ssh
+  126  ssh-keygen -t ed25519 -C "elieeliseekobehi20@gmail.com"
+  127  cat ~/.ssh/id_ed25519.pub
+  128  ssh -T git@github.com
+  129  cd ~/projets
+  130  tree
+  131  mkdir mon-projet-linux
+  132  tree
+  133  cd mon-projet-linux
+  134  git init
+  135  git branch -M main
+  136  cat > README.md << 'EOF'
+# Mon Projet Linux
+
+Projet créé pendant mon apprentissage Linux sur WSL2.
+
+## Ce que j'ai appris
+- Navigation dans le système de fichiers
+- Permissions chmod/chown
+- Bash scripting
+- SSH et réseau
+- Git et GitHub
+EOF
+
+  137  git add .
+  138  git commit -m "Premier commit - cours Linux"
+  139  git status
+  140  git remote add origin https://github.com/kobehielie/mon-projet-linux.git
+  141  git push -u origin main
+  142  git remote set-url origin git@github.com:kobehielie/mon-projet-linux.git
+  143  git remote -v
+  144  git push -u origin main
+  145  echo "- Cron jobs et automatisation" >> README.md
+  146  echo "- Git et GitHub via SSH" >> README.md
+  147  git add.
+  148  git add .
+  149  git commit -m "Ajout des nouvelles compétences"
+  150  git push
+  151  git add .
+  152  apt install -y nginx
+  153  nginx -v
+  154  service nginx start
+  155  service nginx status
+  156  curl http://localhost
+  157  cat > /var/www/html/index.html << 'EOF'
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Elijah - Linux Master</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #0d1117; color: #e6edf3; text-align: center; padding: 50px; }
+        h1 { color: #7ee787; font-size: 2.5em; }
+        p { color: #8b949e; font-size: 1.2em; }
+        .badge { display: inline-block; background: #238636; color: white; padding: 8px 16px; border-radius: 20px; margin: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Elijah Kobehi</h1>
+    <p>Serveur Linux sur WSL2 Ubuntu 24.04</p>
+    <br>
+    <span class="badge">Bash Scripting</span>
+    <span class="badge">SSH</span>
+    <span class="badge">Git</span>
+    <span class="badge">Nginx</span>
+    <span class="badge">Linux</span>
+</body>
+</html>
+EOF
+
+  158  curl http://localhost
+  159  ls /etc/nginx/
+  160  ls /etc/nginx/sites-available/
+  161  ls /etc/nginx/sites-enabled/
+  162  cat /etc/nginx/nginx.conf | head -30
+  163  mkdir -p /var/www/monsite
+  164  cat > /var/www/monsite/index.html << 'EOF'
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Mon Site Linux</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #1a1a2e; color: #eee; text-align: center; padding: 50px; }
+        h1 { color: #e94560; }
+        p { color: #a8a8b3; }
+    </style>
+</head>
+<body>
+    <h1>Mon deuxième site Nginx</h1>
+    <p>Hébergé sur Linux WSL2 - port 8080</p>
+    <p>Elijah Kobehi - Linux Admin</p>
+</body>
+</html>
+EOF
+
+  165  cat > /etc/nginx/sites-available/monsite << 'EOF'
+server {
+    listen 8080;
+    server_name localhost;
+    root /var/www/monsite;
+    index index.html;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+}
+EOF
+
+  166  nginx -t
+  167  ln -s /etc/nginx/sites-available/monsite /etc/nginx/sites-enabled/monsite
+  168  service nginx reload
+  169  curl http://localhost
+  170  curl http://localhost:8080
+  171  tail -f /var/log/nginx/access.log
+  172  mkdir nginx-configs
+  173  cp /etc/nginx/sites-available/monsite nginx-configs/
+  174  cp /var/www/monsite/index.html nginx-configs/monsite.html
+  175  cp /var/www/html/index.html nginx-configs/main.html
+  176  git add .
+  177  git commit -m "Ajout config Nginx - 2 sites virtuels"
+  178  git push
+  179  ufw status
+  180  ufw allow 80/tcp
+  181  ufw allow 443/tcp
+  182  ufw allow 8080/tcp
+  183  ufw status numbered
+  184  apt install -y ca-certificates curl gnupg lsb-release
+  185  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+  186  echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list
+  187  apt update
+  188  apt install -y docker-ce docker-ce-cli containerd.io
+  189  service docker start
+  190  docker --version
+  191  docker info | head -20
+  192  docker run hello-world
+  193  docker images
+  194  docker ps -a
+  195  docker run -it ubuntu bash
+  196  docker run -d -p 8080:80 --name mon-nginx nginx
+  197  docker rm mon-nginx
+  198  docker run -d -p 9090:80 --name mon-nginx nginx
+  199  docker ps
+  200  docker images
+  201  docker stop mon-nginx
+  202  docker start mon-nginx
+  203  docker logs mon-nginx
+  204  docker exec -it mon-nginx bash
+  205  history > ~/projets/linux-cours/historique-$(date +%Y-%m-%d).txt
